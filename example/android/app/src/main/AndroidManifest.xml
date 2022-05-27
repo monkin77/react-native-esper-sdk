@@ -24,4 +24,7 @@
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
     </application>
 
+    <queries>
+        <package android:name="io.shoonya.shoonyadpc"/>
+    </queries>
 </manifest>

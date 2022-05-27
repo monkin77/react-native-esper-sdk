@@ -7,7 +7,7 @@ buildscript {
         }
 
         dependencies {
-            classpath 'com.android.tools.build:gradle:3.5.3'
+            classpath("com.android.tools.build:gradle:4.2.1")
         }
     }
 }
@@ -19,10 +19,10 @@ def safeExtGet(prop, fallback) {
 }
 
 android {
-    compileSdkVersion safeExtGet('EsperSdk_compileSdkVersion', 29)
+    compileSdkVersion safeExtGet('EsperSdk_compileSdkVersion', 30)
     defaultConfig {
-        minSdkVersion safeExtGet('EsperSdk_minSdkVersion', 16)
-        targetSdkVersion safeExtGet('EsperSdk_targetSdkVersion', 29)
+        minSdkVersion safeExtGet('EsperSdk_minSdkVersion', 21)
+        targetSdkVersion safeExtGet('EsperSdk_targetSdkVersion', 30)
         versionCode 1
         versionName "1.0"
 
@@ -51,9 +51,14 @@ repositories {
     google()
     mavenCentral()
     jcenter()
+    maven { url "https://artifact.esper.io/artifactory/esper-device-sdk/" }
 }
 
 dependencies {
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
+
+    // Provide the Esper SDK
+    implementation 'io.esper.devicesdk:app:2.1.2851.18'
+    implementation 'androidx.annotation:annotation:1.1.0'
 }

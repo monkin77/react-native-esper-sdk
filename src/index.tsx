@@ -6,8 +6,8 @@ const LINKING_ERROR =
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo managed workflow\n';
 
-const EsperSdk = NativeModules.EsperSdk
-  ? NativeModules.EsperSdk
+const EsperSdkManager = NativeModules.EsperSdkManager
+  ? NativeModules.EsperSdkManager
   : new Proxy(
       {},
       {
@@ -17,6 +17,14 @@ const EsperSdk = NativeModules.EsperSdk
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return EsperSdk.multiply(a, b);
+export function checkSDKActivation(accessToken : string) : boolean {
+  return EsperSdkManager.checkSDKActivation(accessToken);
+}
+
+export function getDeviceId(callback: (error : boolean, deviceId : string) => void ) : void {
+  return EsperSdkManager.getDeviceId(callback);
+}
+
+export function getSerialNumber(callback: (error : boolean, deviceId : string) => void ) : void {
+  return EsperSdkManager.getSerialNumber(callback);
 }
