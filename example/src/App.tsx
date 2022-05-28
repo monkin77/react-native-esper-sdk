@@ -13,14 +13,11 @@ export default function App() {
       const isActive = await checkSDKActivation(accessToken);
       console.log("Esper SDK isActive:", isActive);
       if (isActive) {
-        getSerialNumber((error, deviceId) => {
-          if (error) {
-            console.log('[EsperManager] Unable to retrieve serialNumber');
-          } else {
-            console.log('[EsperManager] SerialNumber: ', deviceId);
-            setResult(deviceId);
-          }
-        });
+        const serialNumber = await getSerialNumber();
+        if (serialNumber != null) {
+          console.log("Got serialNumber:", serialNumber);
+          setResult(serialNumber);
+        }
       }
     }
 

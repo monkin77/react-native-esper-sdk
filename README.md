@@ -33,18 +33,12 @@ for a detailed explanation of the changes needed.
 import { getSerialNumber, checkSDKActivation } from "react-native-esper-sdk";
 
 // ...
-
 const isActive = await checkSDKActivation(accessToken);
 console.log("Esper SDK isActive:", isActive);
 if (isActive) {
-    getSerialNumber((error, deviceId) => {
-        if (error) {
-        console.log('[EsperManager] Unable to retrieve serialNumber');
-        } else {
-        console.log('[EsperManager] SerialNumber: ', deviceId);
-        setResult(deviceId);
-        }
-    });
+    const serialNumber = await getSerialNumber();
+    if (serialNumber != null)
+        console.log("Serial Number:", serialNumber);
 }
 ```
 

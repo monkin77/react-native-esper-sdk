@@ -21,10 +21,10 @@ export function checkSDKActivation(accessToken : string) : boolean {
   return EsperSdkManager.checkSDKActivation(accessToken);
 }
 
-export function getDeviceId(callback: (error : boolean, deviceId : string) => void ) : void {
-  return EsperSdkManager.getDeviceId(callback);
+export function getDeviceId() : string {
+  return EsperSdkManager.getDeviceId();
 }
 
-export function getSerialNumber(callback: (error : boolean, deviceId : string) => void ) : void {
-  return EsperSdkManager.getSerialNumber(callback);
+export function getSerialNumber() : string {
+  return EsperSdkManager.getSerialNumber();
 }

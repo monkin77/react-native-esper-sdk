@@ -91,12 +91,10 @@ public class EsperSdkModule extends ReactContextBaseJavaModule {
     }
 
     /**
-     *
-     * @param callback Callback that is called after async method.
-     * This callback receives 2 parameters (error, response)
+     * This promise returns the deviceId upon success. Null otherwise.
      */
     @ReactMethod
-    public void getDeviceId(Callback callback) {
+    public void getDeviceId(Promise promise) {
         Log.d("[ESPER Manager]", "Fetching Esper Device Id...");
 
         this.sdk.getEsperDeviceInfo(new EsperDeviceSDK.Callback<EsperDeviceInfo>() {
@@ -104,37 +102,35 @@ public class EsperSdkModule extends ReactContextBaseJavaModule {
             public void onResponse(@Nullable EsperDeviceInfo esperDeviceInfo) {
                 // returnVal = esperDeviceInfo.getDeviceId();
                 Log.d("[ESPER Manager]", esperDeviceInfo.getDeviceId());
-                callback.invoke(null, esperDeviceInfo.getDeviceId());
+                promise.resolve(esperDeviceInfo.getDeviceId());
             }
 
             @Override
             public void onFailure(Throwable t) {
                 t.printStackTrace();
-                callback.invoke(true, null);
+                promise.resolve(null);
             }
         });
     }
 
     /**
-     *
-     * @param callback Callback that is called after async method.
-     * This callback receives 2 parameters (error, response)
+     * This promise returns the serialNumber upon success. Null otherwise.
      */
     @ReactMethod
-    public void getSerialNumber(Callback callback) {
+    public void getSerialNumber(Promise promise) {
         Log.d("[ESPER Manager]", "Fetching Esper Serial Number...");
 
         this.sdk.getEsperDeviceInfo(new EsperDeviceSDK.Callback<EsperDeviceInfo>() {
             @Override
             public void onResponse(@Nullable EsperDeviceInfo esperDeviceInfo) {
                 Log.d("[ESPER Manager]", esperDeviceInfo.getSerialNo());
-                callback.invoke(null, esperDeviceInfo.getSerialNo());
+                promise.resolve(esperDeviceInfo.getSerialNo());
             }
 
             @Override
             public void onFailure(Throwable t) {
                 t.printStackTrace();
-                callback.invoke(true, null);
+                promise.resolve(null);
             }
         });
     }
