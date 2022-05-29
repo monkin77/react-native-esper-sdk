@@ -1,22 +1,29 @@
 import * as React from 'react';
-
+import {useEffect, useState} from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { getSerialNumber, checkSDKActivation } from 'react-native-esper-sdk';
+import { getSerialNumber, getDeviceId, checkSDKActivation } from 'react-native-esper-sdk';
 
 const accessToken = "yourAccessToken";
 
 export default function App() {
-  const [result, setResult] = React.useState<string | undefined>();
+  const [esperId, setEsperId] = useState<string | undefined>();
+  const [esperSerialNo, setEsperSerialNo] = useState<string | undefined>();
 
-  React.useEffect(() => {
+  useEffect(() => {
     const esperHandler = async () => {
       const isActive = await checkSDKActivation(accessToken);
       console.log("Esper SDK isActive:", isActive);
       if (isActive) {
+        const esperDeviceId = await getDeviceId();
+        if (esperDeviceId != null) {
+          console.log("Got esperDeviceId:", esperDeviceId);
+          setEsperId(esperDeviceId);
+        }
+
         const serialNumber = await getSerialNumber();
         if (serialNumber != null) {
           console.log("Got serialNumber:", serialNumber);
-          setResult(serialNumber);
+          setEsperSerialNo(serialNumber);
         }
       }
     }
@@ -26,7 +33,8 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Text>Esper Device ID: {esperId}</Text>
+      <Text>Esper Serial No.: {esperSerialNo}</Text>
     </View>
   );
 }

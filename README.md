@@ -36,9 +36,17 @@ import { getSerialNumber, checkSDKActivation } from "react-native-esper-sdk";
 const isActive = await checkSDKActivation(accessToken);
 console.log("Esper SDK isActive:", isActive);
 if (isActive) {
+    const esperDeviceId = await getDeviceId();
+    if (esperDeviceId != null) {
+        console.log("Got esperDeviceId:", esperDeviceId);
+        setEsperId(esperDeviceId);
+    }
+
     const serialNumber = await getSerialNumber();
-    if (serialNumber != null)
-        console.log("Serial Number:", serialNumber);
+    if (serialNumber != null) {
+        console.log("Got serialNumber:", serialNumber);
+        setEsperSerialNo(serialNumber);
+    }
 }
 ```
 
