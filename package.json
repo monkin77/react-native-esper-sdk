@@ -1,6 +1,6 @@
 {
     "name": "react-native-esper-sdk",
-    "version": "0.1.2",
+    "version": "0.2.0",
     "description": "React Native Module that interacts with the Esper SDK",
     "main": "lib/commonjs/index",
     "module": "lib/module/index",
@@ -135,7 +135,8 @@
         "output": "lib",
         "targets": [
             "commonjs",
-            "module", [
+            "module",
+            [
                 "typescript",
                 {
                     "project": "tsconfig.build.json"
