@@ -30,7 +30,7 @@ for a detailed explanation of the changes needed.
 ## Usage
 
 ```js
-import { getSerialNumber, checkSDKActivation } from "react-native-esper-sdk";
+import { checkSDKActivation, getDeviceId, getSerialNumber, getDeviceUUID } from "react-native-esper-sdk";
 
 // ...
 const isActive = await checkSDKActivation(accessToken);
@@ -39,13 +39,16 @@ if (isActive) {
     const esperDeviceId = await getDeviceId();
     if (esperDeviceId != null) {
         console.log("Got esperDeviceId:", esperDeviceId);
-        setEsperId(esperDeviceId);
     }
 
     const serialNumber = await getSerialNumber();
     if (serialNumber != null) {
         console.log("Got serialNumber:", serialNumber);
-        setEsperSerialNo(serialNumber);
+    }
+
+    const uuid = await getDeviceUUID();
+    if (uuid != null) {
+        console.log("Got UUID:", uuid);
     }
 }
 ```
