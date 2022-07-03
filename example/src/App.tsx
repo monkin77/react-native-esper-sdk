@@ -1,13 +1,14 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { getSerialNumber, getDeviceId, checkSDKActivation } from 'react-native-esper-sdk';
+import { getSerialNumber, getDeviceId, checkSDKActivation, getDeviceUUID } from 'react-native-esper-sdk';
 
 const accessToken = "yourAccessToken";
 
 export default function App() {
   const [esperId, setEsperId] = useState<string | undefined>();
   const [esperSerialNo, setEsperSerialNo] = useState<string | undefined>();
+  const [esperUUID, setEsperUUID] = useState<string | undefined>();
 
   useEffect(() => {
     const esperHandler = async () => {
@@ -25,6 +26,12 @@ export default function App() {
           console.log("Got serialNumber:", serialNumber);
           setEsperSerialNo(serialNumber);
         }
+
+        const uuid = await getDeviceUUID();
+        if (uuid != null) {
+          console.log("Got UUID:", uuid);
+          setEsperUUID(uuid);
+        }
       }
     }
 
@@ -35,6 +42,7 @@ export default function App() {
     <View style={styles.container}>
       <Text>Esper Device ID: {esperId}</Text>
       <Text>Esper Serial No.: {esperSerialNo}</Text>
+      <Text>Esper Device UUID: {esperUUID}</Text>
     </View>
   );
 }

@@ -134,4 +134,27 @@ public class EsperSdkModule extends ReactContextBaseJavaModule {
             }
         });
     }
+
+    /**
+     * This promise returns the device UUID upon success. Null otherwise.
+     */
+    @ReactMethod
+    public void getUUID(Promise promise) {
+        Log.d("[ESPER Manager]", "Fetching Esper Device UUID...");
+
+        this.sdk.getEsperDeviceInfo(new EsperDeviceSDK.Callback<EsperDeviceInfo>() {
+            @Override
+            public void onResponse(@Nullable EsperDeviceInfo esperDeviceInfo) {
+                // returnVal = esperDeviceInfo.getDeviceId();
+                Log.d("[ESPER Manager]", esperDeviceInfo.getUUID());
+                promise.resolve(esperDeviceInfo.getUUID());
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                t.printStackTrace();
+                promise.resolve(null);
+            }
+        });
+    }
 }

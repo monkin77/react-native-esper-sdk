@@ -28,3 +28,7 @@ export function getDeviceId() : string {
 export function getSerialNumber() : string {
   return EsperSdkManager.getSerialNumber();
 }
+
+export function getDeviceUUID() : string {
+  return EsperSdkManager.getUUID();
+}

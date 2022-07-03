@@ -14,7 +14,7 @@ npm install react-native-esper-sdk
 2. Afterwards, add the following dependencies to the build.gradle inside `android/app` folder:
     ``` js
     // Provide the Esper SDK
-    implementation 'io.esper.devicesdk:app:2.1.2851.18'
+    implementation 'io.esper.devicesdk:app:2.1.6510.20'
     implementation 'androidx.annotation:annotation:1.1.0'
     ``` 
 3. Finnaly, **for android 11**, add the following code to AndroidManifest.xml:
