@@ -24,6 +24,21 @@ npm install react-native-esper-sdk
     </queries>
     ```
 
+#### If your App's minSdkVersion < 28
+Add the following lines in AndroidManifest.xml:
+
+Inside Manifest tag:
+``` 
+xmlns:tools="http://schemas.android.com/tools"
+```
+
+Right below:
+```
+<uses-sdk tools:overrideLibrary="esper.library" />
+```
+
+---
+
 You can also check the [Esper SDK documentation](https://docs.esper.io/home/devicesdk.html#enabling-the-esper-sdk-in-your-application)
 for a detailed explanation of the changes needed.
 
